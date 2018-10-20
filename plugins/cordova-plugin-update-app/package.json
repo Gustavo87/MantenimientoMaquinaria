@@ -1,0 +1,11 @@
+{
+  "name": "cordova-plugin-update-app",
+  "version": "1.0.0",
+  "cordova": {
+    "id": "cordova-plugin-update-app",
+    "platforms": [
+      "android"
+    ]
+  },
+  "description": "Este plugin actualiza la app sin necesidad de usar Google Play Storage"
+}

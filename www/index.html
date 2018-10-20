@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" charset="utf-8" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+    <title>Mantenimiento</title>
+    <link href="css/index.css" rel="stylesheet" />
+    <link href="css/SHD_Reset.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <!--Pantalla Login-->
+    <div id="contenedor-login" class="">
+        <div id="login">
+            <div id="logo">
+                <img src="images/Logo_intro_430px_165px-01.svg" />
+            </div>
+            <div id="contenedo-datos-login">
+                <div>
+                    <section>
+                        <h1>Usuario:</h1>
+                        <input type="text" id="txt-usuario" />
+                    </section>
+                    <section>
+                        <h1>Contrase&ntilde;a:</h1>
+                        <input type="password" id="txt-clave" />
+                    </section>
+                </div>
+                <div id="btn-login" class="btn-aceptar-inactive">Aceptar</div>
+            </div>
+            <div id="loader-login" class="hide"></div>
+        </div>
+    </div>
+
+    <div id="contenedor-general">
+        <div id="encabezado">
+            <p>Aplicaci&oacute;n de Mantenimiento</p>
+            <h1>Módulo no definido</h1>
+            <div id="menu-opciones" class="icono-menu-opciones-inactive hide"></div>
+        </div>
+
+        <!--Pantalla Inicial-->
+        <div id="contenedor-inicio">
+            <div id="buscador-equipos">
+                <input id="equipo-buscar" type="text" placeholder="Buscar Equipo" />
+                <ul id="equipos-encontrados" class="hide"></ul>
+            </div>
+            <div id="contenedor-sincronizar">
+                <div id="sincronizar-maestro" class="sincronizar-maestro">
+                    <section>
+                        <div><img id="img-sincronizar" src="images/ICN_sincronizar_activo.svg" /></div>
+                        <div>
+                            <h1>Sincronizar Datos</h1>
+                            <p>Debe de tener conexión a Internet para sincronizar</p>
+                        </div>
+                    </section>
+                </div>
+                <div id="actualizar-app" class="actualizar-app hide">
+                    <section>
+                        <div><img id="img-actualizar-app" src="images/ICN_sincronizar_activo.svg"></div>
+                        <div>
+                            <h1>Actualizar App</h1>
+                            <p>Debe de tener conexión a Internet para actualizar la aplicación</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <!--Pantalla Resumen-->
+        <div id="contenedor-resumen">
+            <div class="titulo">
+                <p>DATOS GENERALES</p>
+            </div>
+            <div id="entradas-tarea">
+                <p>Bodega</p>
+                <div id="select-nodriza" class=""></div>
+                <ul id="nodriza"></ul>
+                <section>
+                    <div class="contenedor_tab_udm">
+                        <b>Lectura de</b>
+                        <span id="tabHorometro" class="tab_udm tab_udm_activo">Horómetro</span>
+                        <span id="tabOdometro" class="tab_udm ">Odómetro</span>
+                    </div>
+                    <div class="contenedor-km">
+                        <p> Anterior</p>
+
+                        <input id="km-anterior" type="text" step="0.01" readonly="readonly" value="0" style="
+    border: none;
+">
+                    </div>
+                    <div class="contenedor-km">
+                        <p> Actual</p>
+
+                        <input id="km-recorrido" type="number" step="0.01">
+                    </div>
+                    <div class="contenedor-hr">
+                        <p>Diferencia</p>
+
+                        <input id="km-diferencia" type="number" step="0.01" readonly="readonly" style="border: none;">
+
+                    </div>
+                    <!--<p id="msjCambioAceite" class="msj_cambio_aceite"></p>-->
+                </section>
+                <p id="msjCambioAceite" class="msj_cambio_aceite"></p>
+                <p>Observaciones</p>
+                <textarea id="observaciones"></textarea>
+                <!-- <p id="msjCambioAceite" class="msj_cambio_aceite"></p>-->
+            </div>
+
+            <div class="botones">
+                <div id="cancelar-resumen" class="boton-cancelar">Cancelar</div>
+                <div id="guardarResumen" class="boton-guardar-inactive">Siguiente</div>
+            </div>
+        </div>
+
+        <!--Pantalla Listado OT-->
+        <div id="contenedor-listado-ot">
+            <div id="filtro-estado-ot">
+                <p>Estado</p>
+                <p>Fecha</p>
+                <div id="select-ot" class="estado-ot-plegada">Pendiente</div>
+                <ul id="ul-ot" class="hide">
+                    <li><h1>Pendiente</h1></li>
+                    <li><h1>Aprobada</h1></li>
+                    <li><h1>Despachada</h1></li>
+                    <li><h1>Cerrada</h1></li>
+                    <li><h1>Rechazado</h1></li>
+                </ul>
+                <input id="filtro-ot-fecha" type="date" class="filtro-ot-fecha"/>
+            </div>
+            <div id="lista-ot">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>        </th>
+                            <th>Fecha   </th>
+                            <th>Equipo  </th>
+                            <th>#Tareas </th>
+                            <th>  OT    </th>
+                            <th>Estado  </th>
+                            <th>        </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--<tr id="ot1">
+                            <td>    +        </td>
+                            <td>2018-10-05   </td>
+                            <td>01A          </td>
+                            <td>1            </td>
+                            <td>2            </td>
+                            <td>Despachada   </td>
+                            <td><button>CERRAR</button></td>
+                        </tr>
+                        <tr data-padre="ot1" class="hide">
+                            <td colspan="7">
+                                <table>
+                                     <thead>
+                                         <tr>
+                                             <th>
+                                                 # Item
+                                             </th>
+                                             <th>
+                                                 Descripcion
+                                             </th>
+                                             <th>
+                                                 Cantidad
+                                             </th>
+                                         </tr>
+                                     </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1     </td>
+                                            <td>Aceite</td>
+                                            <td>20.00 </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1     </td>
+                                            <td>Aceite</td>
+                                            <td>20.00 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr id="ot2">
+                            <td>    +        </td>
+                            <td>2018-10-05   </td>
+                            <td>01A          </td>
+                            <td>1            </td>
+                            <td>2            </td>
+                            <td>Despachada   </td>
+                            <td><button>CERRAR</button></td>
+                        </tr>
+                        <tr data-padre="ot2" class="hide">
+                            <td colspan="7">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                # Item
+                                            </th>
+                                            <th>
+                                                Descripcion
+                                            </th>
+                                            <th>
+                                                Cantidad
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1     </td>
+                                            <td>Aceite</td>
+                                            <td>20.00 </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1     </td>
+                                            <td>Aceite</td>
+                                            <td>20.00 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="botones">
+                <div id="cancelar-listado-ot" class="boton-cancelar">Cancelar</div>
+                <div id="guardar-ot" class="boton-actualizar-apuntes">Bajar Apuntes</div>
+            </div>
+        </div>
+
+        <!--Pantalla Agregar tarea-->
+        <div id="contenedor-tarea">
+            <div id="contenedor-datos"></div>
+            <div id="contenedor-buscador-tareas">
+                <input type="text" placeholder="Buscador Tareas" id="buscador-tareas" />
+            </div>
+            <div id="pestanya_tarea">
+                <div id="btn-ocultar-tareas" class="btn-ocultar-tareas"> LISTA DE TAREAS </div>
+                <!--<div id="tab_todas">TODAS</div>
+                <div id="tab_favoritos">FAVORITOS</div>-->
+            </div>
+
+            <div id="msg-tareas">
+                Selecciona la tarea a realizar presionando el icono
+            </div>
+
+            <section>
+                <div id="menu-tareas">
+                </div>
+            </section>
+
+            <div id="detalle-tareas">
+                <div id="titulo-tareas-agregadas">TAREAS AGREGADAS</div>
+                <div id="contenedor-tareas-agregadas">
+                    <div id="empty-msg-tarea">No hay tareas agregadas</div>
+                    <ul id="tareas-agregadas"></ul>
+                </div>
+                <div id="pointer-tarea" class="hide"></div>
+                <div id="bt-eliminar-tarea" data-index="-1" class="hide"><span></span>Eliminar Tarea</div>
+            </div>
+            <div class="botones">
+                <div id="cancelar-tarea" class="boton-cancelar">Cancelar</div>
+                <div id="revisarApunte" class="boton-guardar-inactive">Revisar y Confirmar</div>
+            </div>
+        </div>
+        <!--Pantalla Agregar Items-->
+        <div id="contenedor-items">
+            <!--<input type="hidden" id="tarea-seleccionada" />-->
+            <div id="buscador-items">
+                <p>AGREGAR ITEMS</p>
+                <input id="items-buscar" type="text" placeholder="Buscar Item" />
+                <ul id="items-encontrados" class="hide"></ul>
+            </div>
+            <div id="items">
+                <label>ITEMS AGREGADOS</label>
+                <div id="detlalle-items">
+                    <ul id="items-agregados"></ul>
+                </div>
+                <div id="empty-msg">Utilice el buscador para agregar items</div>
+
+                <div id="pointer" class="hide"></div>
+                <div id="bt-eliminar-item" data-index="-1" class="hide"><span></span>Eliminar</div>
+            </div>
+            <div class="botones">
+                <div id="cancelar-items" class="boton-cancelar">Cancelar</div>
+                <div id="agregar-ItemsTarea" class="boton-guardar">Agregar y Continuar</div>
+            </div>
+        </div>
+        <!--Editar Items-->
+        <div id="contenedor-edicionItems">
+            <h3>Lista de Items</h3>
+            <!--<input type="hidden" id="numTarea-seleccionada" />-->
+            <ul id="lista-items"></ul>
+            <div class="botones">
+                <div id="cancelar-edicion" class="boton-cancelar">Cerrar</div>
+                <div id="editar-items" class="boton-guardar">Editar</div>
+            </div>
+        </div>
+        <!--Pantalla Detalle Apunte-->
+        <div id="contenedor-detalleApunte" class="contenedor-pagina">
+            <div class="titulo-contenedor"><h2>DETALLE DE TAREAS</h2></div>
+            <div id="detalle-apunte" class="contenedor-lista">
+                <ul class="lista-tareas" id="lista-tareas"></ul>
+            </div>
+            <div class="botones">
+                <div id="cancelar-apunte" class="boton-cancelar">Cancelar</div>
+                <div id="guardar-apunte" class="boton-guardar">Confirmar y Guardar</div>
+            </div>
+        </div>
+        <!--Pantalla Detalle tareas por sincronizar-->
+        <div id="contenedor-detalleSincAnpunte" class="contenedor-pagina">
+            <div class="titulo-contenedor">
+                <h2>DETALLES TAREAS POR SINCRONIZAR</h2>
+            </div>
+            <div id="detalleSinc-apunte" class="contenedor-lista">
+                <ul id="lista-apuntes" class="lista-apunte"></ul>
+            </div>
+            <div class="botones">
+                <div id="cancelarSinc-apunte" class="boton-cancelar">Cancelar</div>
+                <div id="guardarSinc-apunte" class="boton-guardar">Sincronizar</div>
+            </div>
+        </div>
+        <!--Barra de estado-->
+        <div id="contenedor-barraEstado">
+            <div id="pointer-menu">
+                <div class="arrow-before"></div>
+                <div class="arrow-after"></div>
+            </div>
+            <div id="barra-estado">
+                <div id="contenedor-usuario" class="contenedor-usuario">
+                    <section>
+                        <h1>Usuario Conectado</h1>
+                        <p class="numero-tareas" id="numero-tareas"> 0 Tareas sin sincronizar</p>
+                    </section>
+                </div>
+                <div id="contenedor-ot" class="contenedor-ot">
+                    <section>
+                        <h1>Ver OT</h1>
+                        <p>Ordenes Trabajo</p>
+                    </section>
+                </div>
+                <div id="contenedor-conexion" class="contenedor-conexion">
+                    <section>
+                        <h1>Sin Conexion</h1>
+                        <p>Ultima sincronizacion hace 15 min</p>
+                    </section>
+                </div>
+                <div id="contenedor-salir" class="contenedor-salir">
+
+                    <p>Salir</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="block-screen" class="hide">
+        <h1 id="titulo-barra-progreso" class="titulo-barra-progreso">Sincronizando...</h1>
+        <div id="contenedor-barra-progreso" class="hide">
+            <div id="barra-progreso">
+                <h2 id="porcentaje" class="porcentaje-progreso">0%</h2>
+                <div id="progreso"></div>
+            </div>
+        </div>
+    </div>
+    <!-- LubricantesCordova references -->
+
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+    <script src="scripts/jquery-2.1.1.min.js"></script>
+
+    <script src="scripts/CryptoJS.js"></script>
+    <script src="scripts/Lubricantes.js"></script>
+    <script src="scripts/Funciones.js"></script>
+    <script src="scripts/index.js"></script>
+
+    <script type="text/javascript">
+        console.log("Densidad:"+window.devicePixelRatio);
+        console.log("Width:" + $(document).width());
+    </script>
+
+</body>
+</html>
